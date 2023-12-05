@@ -1,39 +1,71 @@
-const dinosaur = document.querySelector(".dinosaur");
-const obstacle = document.querySelector(".obstacle");
-const gameOverText = document.querySelector(".game-over");
-let isJumping = false;
-let isGameOver = false;
-
-document.addEventListener("keydown", function (event) {
-  if (event.key === "w" || event.key == " " && !isJumping && !isGameOver) {
-    isJumping = true;
-    dinosaur.style.animation = "jump 0.8s";
-    setTimeout(() => {
-      dinosaur.style.animation = "none";
-      isJumping = false;
-    }, 800);
-  }
-});
-
-
-
-function gameIsOver() {
-  isGameOver = true;
-  dinosaur.style.animation = "none";
-  obstacle.style.animation = "none";
-  gameOverText.style.display = "block";
+const computerChoice = document.getElementById("computer-choice")
+const playerChoice = document.getElementById("player-choice")
+const resultOutput = document.getElementById("result")
+ 
+const possibleChoices = document.querySelectorAll('button');
+ 
+let player;
+let computer;
+let result ;
+ 
+possibleChoices.forEach(button => button.addEventListener('click', (e) => {
+    player = e.target.id;
+    playerChoice.innerHTML = player;
+    generateComputerChoice();
+    getResult()
+}
+))
+ 
+function generateComputerChoice(){
+    const randomNumber = Math.floor(Math.random() * 3) + 1;
+ 
+    if(randomNumber == 1){
+         computer = "rock"
+    }
+ 
+    if(randomNumber == 2){
+        computer = "paper"
+   }
+ 
+   if(randomNumber == 3){
+    computer = "scissors"
+   }
+ 
+    computerChoice.innerHTML = computer
+ 
+ 
+ 
+   
+}
+ 
+ 
+function getResult(){
+    if(computer == player){
+        result= "gelijkspel"
+    }
+ 
+    if(computer == 'rock' && player == 'paper'){
+        result= "je hebt gewonnen "
+    }
+ 
+    if(computer == 'rock' && player == 'scissors'){
+        result= "je hebt verloren "
+    }
+    if(computer == 'paper' && player == 'scissors'){
+        result= "je hebt gewonnen "
+    }
+    if(computer == 'paper' && player == 'rock'){
+        result= "je hebt verloren "
+    }
+    if(computer == 'scissors' && player == 'rock'){
+        result= "je hebt gewonnen "
+    }
+    if(computer == 'scissors' && player == 'paper'){
+        result= "je hebt verloren "
+    }
+ 
+    resultOutput.innerHTML = result
 }
 
-function checkCollision() {
-  const dinosaurRect = dinosaur.getBoundingClientRect();
-  const obstacleRect = obstacle.getBoundingClientRect();
-  if (
-    dinosaurRect.right > obstacleRect.left &&
-    dinosaurRect.left < obstacleRect.right &&
-    dinosaurRect.bottom > obstacleRect.top
-  ) {
-    gameIsOver();
-  }
-}
 
-setInterval(checkCollision, 10);
+
