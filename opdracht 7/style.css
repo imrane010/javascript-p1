@@ -1,0 +1,9 @@
+div{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: rgb(255, 0, 0);
+    top: 50%;
+    left:40%;
+   
+}
