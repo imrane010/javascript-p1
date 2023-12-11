@@ -1,0 +1,12 @@
+#traffic-light-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* Aanpassen aan gewenste grootte */
+  }
+  
+  #traffic-light {
+    width: 100px; /* Aanpassen aan gewenste grootte */
+    cursor: pointer;
+  }
+  
